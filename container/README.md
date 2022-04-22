@@ -5,3 +5,4 @@ Compile the source code and you can test full.c
 make menuconfig
 make -j $(nproc)
 ```
+Make a link dir name fs to buildroot-path/output/target, and run the execution file after compiling full.c.
