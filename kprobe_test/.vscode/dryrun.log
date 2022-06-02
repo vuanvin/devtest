@@ -1,0 +1,5 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/yuanyin/syslab/linux-test/kprobe_test'
+make -C /lib/modules/5.10.102.1-microsoft-standard-WSL2/build M=/home/yuanyin/syslab/linux-test/kprobe_test modules
+make: Leaving directory '/home/yuanyin/syslab/linux-test/kprobe_test'
+ 
