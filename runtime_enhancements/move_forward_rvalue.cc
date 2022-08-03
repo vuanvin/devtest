@@ -15,23 +15,40 @@ struct A {
 
   virtual ~A() { cout << data << endl; }
 
-  void Fn(A<T> &&a) {}
+  void fn(A<T> &&a) {}
 };
 
 template<typename T>
-A<T> fr(const A<T>& a) {
+A<T>& fl(A<T>& a) {
   return a;
 }
 
 template<typename T>
-A<T>&& frr(A<T>& a) {
+A<T> f(const A<T>& a) {
+  return a;
+}
+
+template<typename T>
+A<T>&& fr(A<T>& a) {
   return std::move(a);
 }
 
+int&& func(int&& p) {
+  return std::move(p);
+}
+
+A<string> && errfunc() {
+  return A<string>("errfunc!!!");
+}
+
+int ifunc() {
+  return 10;
+}
 
 int main() {
   A<string> a("string a");
   cout << a.data << endl;
+  auto & dref = a.data;
 
   auto &&xref = A<string>("string without name one.");
   xref = A<string>("string without name two.");
@@ -47,8 +64,30 @@ int main() {
 
   cout << "--------------------" << endl;
 
-  auto b = fr(a);
-  auto c = frr<string>(a);
+  auto b = f(a);
+  auto c = fr(a);
+  auto & d = fl(a);
 
+  cout << "--------------------" << endl;
+
+  int p = 100;
+  int&& w = func(std::move(p));
+  w ++;
+  cout << w << endl;
+  cout << p << endl;
+
+  cout << "--------------------" << endl;
+
+  auto fref = ifunc;
+  int tref();
+  int tref();
+  // tref = ifunc;
+  auto & lfref = ifunc;
+  auto && rfref = std::move(ifunc);
+
+  cout << fref() << endl;
+  cout << rfref() << endl;
+
+  // auto err = errfunc();
   cout << "--------------------" << endl;
 }
